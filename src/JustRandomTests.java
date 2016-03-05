@@ -1,13 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-
-import java.util.Properties;
 
 public class JustRandomTests {
 	
@@ -22,13 +17,12 @@ public class JustRandomTests {
 			data+=line;
 		}
 		data = data.trim();
-//		System.out.println(data);
 		return data;
 	}
 	public static void main(String args[]) throws IOException
 	{
-		String text = readString("./src/data.txt");
-		ConceptualSummarizer c = new ConceptualSummarizer(text,"Percheron");
+		String text = readString("./src/quoraSisterStory.txt");
+		ConceptualSummarizer c = new ConceptualSummarizer(text,"lymph");
 		List<String> summary = c.getSummary();
 		for(String s: summary)
 			System.out.println(s);

@@ -111,8 +111,6 @@ public class SentenceScoreCalculator {
 		for(String s:wordList.getKeyWords().keySet())
 			if(sentence.contains(s))
 				++commonWords;
-//		System.out.println(commonWords);
-//		System.out.println(sum);
 		return (1/(commonWords*(commonWords+1.0))*sum);		
 	}
 }
