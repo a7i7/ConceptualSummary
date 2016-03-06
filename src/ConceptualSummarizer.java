@@ -28,7 +28,7 @@ public class ConceptualSummarizer {
 		wordList = new WordList(text);
 		sentences = TextSplitter.splitIntoSentences(this.text);
 		titleWords = TextSplitter.splitIntoWords(this.title);
-		System.out.println(titleWords);
+//		System.out.println(titleWords);
 	}
 	
 	private List<SimpleEntry<String,Integer>> scoreSentences(final Map<String,Double> sentenceRanks)
@@ -37,7 +37,7 @@ public class ConceptualSummarizer {
 		
 		for(int i = 0;i<sentences.size();i++)
 		{
-			System.out.println(sentences.get(i));
+//			System.out.println(sentences.get(i));
 			
 			List<String> splittedWords = TextSplitter.splitIntoWords(sentences
 					.get(i));
@@ -54,8 +54,8 @@ public class ConceptualSummarizer {
 					splittedWords, wordList);
 			double dbsSbsScore = (sbsScore + dbsScore) * 1.0;
 			
-			System.out.println(titleScore + " " + sentenceLengthScore + " "
-					+ sentencePositionScore + " " + sbsScore + " " + dbsScore);
+//			System.out.println(titleScore + " " + sentenceLengthScore + " "
+//					+ sentencePositionScore + " " + sbsScore + " " + dbsScore);
 			
 			double totalScore = TITLE_SCORE_WEIGHT * titleScore
 					+ DBS_SBS_SCORE_WEIGHT * dbsSbsScore
@@ -66,8 +66,8 @@ public class ConceptualSummarizer {
 			sentenceRanks.put(sentences.get(i), totalScore);
 			sortedSentenceListWithPosition
 					.add(new SimpleEntry<String, Integer>(sentences.get(i), i));
-			System.out.println(totalScore);
-			System.out.println("~~~~~~~~~~~~~~~");
+//			System.out.println(totalScore);
+//			System.out.println("~~~~~~~~~~~~~~~");
 		}
 		
 		Collections.sort(sortedSentenceListWithPosition, new Comparator<SimpleEntry<String, Integer>>() {
@@ -91,11 +91,11 @@ public class ConceptualSummarizer {
 		List<SimpleEntry<String,Integer>> intermediateSentences = new ArrayList<SimpleEntry<String,Integer>>();
 		List<String> finalSummary = new ArrayList<String>();
 		
-		for(SimpleEntry<String,Integer> s: rankedSentences)
-		{
-			System.out.println(s.getKey());
-			System.out.println(sentenceRanks.get(s.getKey()));
-		}
+//		for(SimpleEntry<String,Integer> s: rankedSentences)
+//		{
+//			System.out.println(s.getKey());
+//			System.out.println(sentenceRanks.get(s.getKey()));
+//		}
 		
 		for(SimpleEntry<String,Integer> s: rankedSentences)
 		{
@@ -117,7 +117,7 @@ public class ConceptualSummarizer {
 		
 		for(SimpleEntry<String,Integer> s:intermediateSentences)
 		{
-			System.out.println(s.getKey()+"\n"+s.getValue());
+//			System.out.println(s.getKey()+"\n"+s.getValue());
 			finalSummary.add(s.getKey());
 		}
 		return finalSummary;

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,6 +14,8 @@ public class WordList {
 	private Set<String> stopWords;
 	private Map<String,Double> keyWords;
 	final static int TOP_KEYWORDS_LENGTH = 10;
+	private final static boolean CONCEPT_NET_WEB_API_ON = false;
+	
 	WordList(String text)
 	{
 		stopWords = new HashSet<String>();
@@ -59,6 +62,33 @@ public class WordList {
 				break;
 			
 		}
+		
+		if(CONCEPT_NET_WEB_API_ON)
+		{
+			List<String> currentKeyset = new ArrayList<String>(keyWords.keySet());
+			for(String s:currentKeyset)
+			{
+				List<String> similarAssociatedWords = null;
+				double currentKeyWordScore = keyWords.get(s);
+				try
+				{
+					similarAssociatedWords = ConceptNetDataAccessInterface.getListOfAssociations(s);
+				}
+				catch(IOException e)
+				{
+					e.printStackTrace();
+					break;
+				}
+	//			System.out.println(s);
+	//			System.out.println(similarAssociatedWords);
+				for(String word:similarAssociatedWords)
+				{
+					if(keyWords.get(word)==null || keyWords.get(word)<currentKeyWordScore)
+						keyWords.put(word, currentKeyWordScore);
+				}
+			}
+		}
+		
 	}
 	
 	public Set<String> getStopWords()

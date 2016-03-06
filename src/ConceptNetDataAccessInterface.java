@@ -4,7 +4,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import org.json.*;
 
 public class ConceptNetDataAccessInterface {
 
@@ -12,15 +16,21 @@ public class ConceptNetDataAccessInterface {
 	private static String getUrl = "http://conceptnet5.media.mit.edu/data/5.4/assoc/c/en/";
 	private static HttpURLConnection con = null;
 	
-	
-	public static String getListOfAssociations(String object) throws IOException {
+	public static List<String> getListOfAssociations(String object) throws IOException
+	{
+		return getListOfAssociations(object,-1);
+	}
+	public static List<String> getListOfAssociations(String object,int limit) throws IOException {
 		
-		URL obj = new URL(getUrl+object);
+		final String ENGLISH_LANGUAGE = "en";
+		
+		String conceptNetResponse = null;
+		URL obj = new URL(getUrl+object+((limit==-1)?"":"?limit="+limit));
 		con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("GET");
 		con.setRequestProperty("User-Agent", USER_AGENT);
 		int responseCode = con.getResponseCode();
-		System.out.println("GET Response Code :: " + responseCode);
+
 		if (responseCode == HttpURLConnection.HTTP_OK)
 		{
 			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -32,10 +42,28 @@ public class ConceptNetDataAccessInterface {
 				response.append(inputLine);
 			}
 			in.close();
-			return response.toString();
-		} else {
+			conceptNetResponse = response.toString();
+		}
+		else
+		{
 			System.out.println("GET request not worked");
 		}
-		return null;
+		
+		JSONObject conceptNetResponseJSONObject = new JSONObject(conceptNetResponse);
+		JSONArray arrayOfSimilarConcepts = (JSONArray) conceptNetResponseJSONObject.get("similar");
+		List<String> similarConcepts = new ArrayList<String>();
+		
+		for(int i=0;i<arrayOfSimilarConcepts.length();i++)
+		{
+			JSONArray data = (JSONArray) arrayOfSimilarConcepts.get(i);
+			String [] word = data.getString(0).split("/");
+			double associationScore = data.getDouble(1);	//not using this for now
+			String language = word[2];
+			String similarWord = word[3];
+			if(language.equals(ENGLISH_LANGUAGE) && !similarWord.contains("_"))
+				similarConcepts.add(similarWord);
+		}
+		
+		return similarConcepts;
 	}
 }
