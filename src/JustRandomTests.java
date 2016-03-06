@@ -22,12 +22,14 @@ public class JustRandomTests {
 	}
 	public static void main(String args[]) throws IOException
 	{
-		final String TITLE = "SOFT WORMBOT TRIES OUT NEW LIGHT-UP SKIN.txt";
-		String text = readString("./test/"+TITLE);
-		ConceptualSummarizer c = new ConceptualSummarizer(text,TITLE.replace(".txt", ""));
-		List<String> summary = c.getSummary();
-		for(String s: summary)
-			System.out.println(s);
+//		final String TITLE = "SOFT WORMBOT TRIES OUT NEW LIGHT-UP SKIN.txt";
+//		String text = readString("./test/"+TITLE);
+//		ConceptualSummarizer c = new ConceptualSummarizer(text,TITLE.replace(".txt", ""));
+//		List<String> summary = c.getSummary();
+//		for(String s: summary)
+//			System.out.println(s);
+		String response = ConceptNetDataAccessInterface.getListOfAssociations("cat");
+		System.out.println(response);
 //		System.exit(0);
 //		List<String> sentences = TextSplitter.splitIntoSentences(text);
 //		List<String> titleWords = TextSplitter.splitIntoWords("Percheron");

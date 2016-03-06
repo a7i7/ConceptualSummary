@@ -83,9 +83,10 @@ public class ConceptualSummaryInterface
 		titleLabel.setForeground(Color.WHITE);
 		paragraphLabel.setForeground(Color.WHITE);
 		summaryLabel.setForeground(Color.WHITE);
-
-		guiPanel.setBackground(Color.RED/*.darker().darker()*/.brighter().brighter());
-
+		
+		Color c = new Color(0.70f, 0.80f, 0.90f);
+		guiPanel.setBackground(c);
+		
 		headerLabel.setFont(new Font("Serif",Font.BOLD,34));
 		titleLabel.setFont(new Font("Serif",Font.BOLD,12));
 		paragraphLabel.setFont(new Font("Serif",Font.BOLD,12));

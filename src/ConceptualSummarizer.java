@@ -17,8 +17,10 @@ public class ConceptualSummarizer {
 	private static final double SENTENCE_LENGTH_SCORE_WEIGHT = 0.25;
 	private static final double SENTENCE_POSITION_SCORE_WEIGHT = 1.0;
 	private static final double DBS_SBS_SCORE_WEIGHT = 2.0;
-	private static final double TOTAL_WEIGHT = TITLE_SCORE_WEIGHT + SENTENCE_LENGTH_SCORE_WEIGHT + SENTENCE_POSITION_SCORE_WEIGHT + DBS_SBS_SCORE_WEIGHT;
-	
+	private static final double TOTAL_WEIGHT = TITLE_SCORE_WEIGHT
+			+ SENTENCE_LENGTH_SCORE_WEIGHT + SENTENCE_POSITION_SCORE_WEIGHT
+			+ DBS_SBS_SCORE_WEIGHT;
+
 	ConceptualSummarizer(String text,String title)
 	{
 		this.text = text;
@@ -37,19 +39,33 @@ public class ConceptualSummarizer {
 		{
 			System.out.println(sentences.get(i));
 			
-			List<String> splittedWords = TextSplitter.splitIntoWords(sentences.get(i));
-			double titleScore = SentenceScoreCalculator.calculateTitleScore(titleWords, splittedWords, wordList);
-			double sentenceLengthScore = SentenceScoreCalculator.sentenceLengthScore(splittedWords);
-			double sentencePositionScore = SentenceScoreCalculator.sentencePositionScore(i+1, sentences.size());
-			double sbsScore = SentenceScoreCalculator.summationBasedSelection(splittedWords, wordList);
-			double dbsScore = SentenceScoreCalculator.densityBasedSelection(splittedWords, wordList);
-			double dbsSbsScore = (sbsScore+dbsScore)*1.0;
-			System.out.println(titleScore+" "+sentenceLengthScore+" "+sentencePositionScore+" "+sbsScore+" "+dbsScore);
-			double totalScore = TITLE_SCORE_WEIGHT*titleScore + DBS_SBS_SCORE_WEIGHT*dbsSbsScore + SENTENCE_LENGTH_SCORE_WEIGHT*sentenceLengthScore + SENTENCE_POSITION_SCORE_WEIGHT*sentencePositionScore;
+			List<String> splittedWords = TextSplitter.splitIntoWords(sentences
+					.get(i));
 			
-			totalScore/=TOTAL_WEIGHT;
+			double titleScore = SentenceScoreCalculator.calculateTitleScore(
+					titleWords, splittedWords, wordList);
+			double sentenceLengthScore = SentenceScoreCalculator
+					.sentenceLengthScore(splittedWords);
+			double sentencePositionScore = SentenceScoreCalculator
+					.sentencePositionScore(i + 1, sentences.size());
+			double sbsScore = SentenceScoreCalculator.summationBasedSelection(
+					splittedWords, wordList);
+			double dbsScore = SentenceScoreCalculator.densityBasedSelection(
+					splittedWords, wordList);
+			double dbsSbsScore = (sbsScore + dbsScore) * 1.0;
+			
+			System.out.println(titleScore + " " + sentenceLengthScore + " "
+					+ sentencePositionScore + " " + sbsScore + " " + dbsScore);
+			
+			double totalScore = TITLE_SCORE_WEIGHT * titleScore
+					+ DBS_SBS_SCORE_WEIGHT * dbsSbsScore
+					+ SENTENCE_LENGTH_SCORE_WEIGHT * sentenceLengthScore
+					+ SENTENCE_POSITION_SCORE_WEIGHT * sentencePositionScore;
+			totalScore /= TOTAL_WEIGHT;
+
 			sentenceRanks.put(sentences.get(i), totalScore);
-			sortedSentenceListWithPosition.add(new SimpleEntry<String, Integer>(sentences.get(i),i));
+			sortedSentenceListWithPosition
+					.add(new SimpleEntry<String, Integer>(sentences.get(i), i));
 			System.out.println(totalScore);
 			System.out.println("~~~~~~~~~~~~~~~");
 		}
@@ -76,7 +92,10 @@ public class ConceptualSummarizer {
 		List<String> finalSummary = new ArrayList<String>();
 		
 		for(SimpleEntry<String,Integer> s: rankedSentences)
+		{
+			System.out.println(s.getKey());
 			System.out.println(sentenceRanks.get(s.getKey()));
+		}
 		
 		for(SimpleEntry<String,Integer> s: rankedSentences)
 		{
