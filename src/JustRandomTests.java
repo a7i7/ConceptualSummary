@@ -17,12 +17,14 @@ public class JustRandomTests {
 			data+=line;
 		}
 		data = data.trim();
+		br.close();
 		return data;
 	}
 	public static void main(String args[]) throws IOException
 	{
-		String text = readString("./src/quoraSisterStory.txt");
-		ConceptualSummarizer c = new ConceptualSummarizer(text,"lymph");
+		final String TITLE = "SOFT WORMBOT TRIES OUT NEW LIGHT-UP SKIN.txt";
+		String text = readString("./test/"+TITLE);
+		ConceptualSummarizer c = new ConceptualSummarizer(text,TITLE.replace(".txt", ""));
 		List<String> summary = c.getSummary();
 		for(String s: summary)
 			System.out.println(s);

@@ -25,7 +25,7 @@ public class SentenceScoreCalculator {
 		if(titleWords.size()==0)
 			return 0.0;
 		
-		return count/titleWords.size();
+		return count/(double)titleWords.size();
 	}
 	
 	public static double sentenceLengthScore(List<String> sentence)
@@ -34,6 +34,7 @@ public class SentenceScoreCalculator {
 		return 1.0 - (absDiff/IDEAL_SENTENCE_LENGTH);
 	}
 	
+	//http://research.nii.ac.jp/ntcir/workshop/OnlineProceedings3/NTCIR3-TSC-SekiY.pdf (illegal though)
 	public static double sentencePositionScore(int position,int totalSentences)
 	{
 		double normalizedPosition = position/(double)totalSentences;
@@ -61,7 +62,7 @@ public class SentenceScoreCalculator {
 	        return 0.0;
 	}
 	
-	public static double sbs(List<String> sentence,WordList wordList)
+	public static double summationBasedSelection(List<String> sentence,WordList wordList)
 	{
 		double score = 0.0;
 		if(sentence.size()==0)
@@ -71,10 +72,10 @@ public class SentenceScoreCalculator {
 			{
 				score+=wordList.getKeyWords().get(word);
 			}
-		return (score/Math.abs(sentence.size()))/10.0;
+		return (score/Math.abs(sentence.size()))/1.0;
 	}
 	
-	public static double dbs(List<String> sentence,WordList wordList)
+	public static double densityBasedSelection(List<String> sentence,WordList wordList)
 	{
 		double score;
 		if(sentence.size()==0)
@@ -111,6 +112,8 @@ public class SentenceScoreCalculator {
 		for(String s:wordList.getKeyWords().keySet())
 			if(sentence.contains(s))
 				++commonWords;
+		if(commonWords==0)
+			return 0.0;
 		return (1/(commonWords*(commonWords+1.0))*sum);		
 	}
 }
