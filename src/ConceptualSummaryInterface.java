@@ -12,8 +12,8 @@ public class ConceptualSummaryInterface
 {
 	private JFrame conceptualSummaryFrame;
 	private JPanel guiPanel;
-	private JLabel headerLabel, titleLabel, paragraphLabel, summaryLabel;
-	private JTextField titleField;
+	private JLabel headerLabel, queryLabel, paragraphLabel, summaryLabel;
+	private JTextField queryField;
 	private JTextArea paragraphArea, summaryArea;
 	private JButton clearButton, resetButton, addFileButton, summarizeButton, saveFileButton;
 	private JScrollPane summaryScrollPane, paragraphScrollPane;
@@ -46,11 +46,11 @@ public class ConceptualSummaryInterface
 
 		guiPanel = new JPanel();
 		headerLabel = new JLabel("Conceptual Summary");
-		titleLabel = new JLabel("Title :");
+		queryLabel = new JLabel("Enter Query :");
 		paragraphLabel = new JLabel("Paragraph :");
 		summaryLabel = new JLabel("Summary :");
 
-		titleField = new JTextField();
+		queryField = new JTextField();
 		paragraphArea = new JTextArea();
 		summaryArea = new JTextArea();
 		clearButton = new JButton("Clear");
@@ -62,17 +62,17 @@ public class ConceptualSummaryInterface
 
 		guiPanel.setBounds(0,0,700,725);
 		headerLabel.setBounds(130,2,500,50);
-		titleLabel.setBounds(15,60,150,25);
-		paragraphLabel.setBounds(15,135,150,25);
+		queryLabel.setBounds(15,330,150,25);
+		paragraphLabel.setBounds(15,65,150,25);
 		summaryLabel.setBounds(15,415,100,25);
 
-		titleField.setBounds(10,85,680,50);
-		paragraphArea.setBounds(10,160,680,220);
+		queryField.setBounds(10,350,680,35);
+		paragraphArea.setBounds(10,90,680,235);
 		summaryArea.setBounds(10,440,680,220);
 
-		clearButton.setBounds(120,385,100,25);
-		addFileButton.setBounds(10,385,100,25);
-		summarizeButton.setBounds(520,385,170,25);
+		clearButton.setBounds(590,60,100,25);
+		addFileButton.setBounds(480,60,100,25);
+		summarizeButton.setBounds(520,390,170,25);
 
 		resetButton.setBounds(10,665,100,25);		
 		saveFileButton.setBounds(570,665,120,25);
@@ -80,24 +80,24 @@ public class ConceptualSummaryInterface
 
 
 		headerLabel.setForeground(Color.WHITE);
-		titleLabel.setForeground(Color.WHITE);
+		queryLabel.setForeground(Color.WHITE);
 		paragraphLabel.setForeground(Color.WHITE);
 		summaryLabel.setForeground(Color.WHITE);
 		
 		guiPanel.setBackground(Color.green.darker().darker().darker());
 		
 		headerLabel.setFont(new Font("Serif",Font.BOLD,34));
-		titleLabel.setFont(new Font("Serif",Font.BOLD,12));
+		queryLabel.setFont(new Font("Serif",Font.BOLD,12));
 		paragraphLabel.setFont(new Font("Serif",Font.BOLD,12));
 		summaryLabel.setFont(new Font("Serif",Font.BOLD,12));
-		titleField.setFont(new Font("Serif",Font.BOLD,22));
+		queryField.setFont(new Font("Serif",Font.ITALIC,16));
 		clearButton.setFont(new Font("Serif",Font.BOLD,12));
 		resetButton.setFont(new Font("Serif",Font.BOLD,12));
 		addFileButton.setFont(new Font("Serif",Font.BOLD,12));
 		summarizeButton.setFont(new Font("Serif",Font.BOLD,12));
 		saveFileButton.setFont(new Font("Serif",Font.BOLD,12));
 
-		titleField.setHorizontalAlignment(JTextField.CENTER);
+		queryField.setHorizontalAlignment(JTextField.CENTER);
 
 		paragraphArea.setLineWrap(true);
 		summaryArea.setLineWrap(true);
@@ -132,15 +132,16 @@ public class ConceptualSummaryInterface
 						String totalText = "";
 						if(file.getName().endsWith(".tsv"))
 						{
-							String inputKey = JOptionPane.showInputDialog("Enter the Key:");
+							String inputKey = JOptionPane.showInputDialog(conceptualSummaryFrame, "Enter the Key:");
 							while( (line = bReader.readLine()) != null )
 							{
 								String data[] = line.split("\t");
 								if(data[0].equalsIgnoreCase(inputKey))
 								{
-									totalText+=data[2];
 									if(!data[2].endsWith("."))
 										data[2]+=".";
+									totalText+=data[2];
+									
 									totalText+="\n";
 								}
 							}
@@ -179,7 +180,7 @@ public class ConceptualSummaryInterface
 			{
 				paragraphArea.setText("");
 				summaryArea.setText("");
-				titleField.setText("");
+				queryField.setText("");
 			}
 		});
 
@@ -187,7 +188,7 @@ public class ConceptualSummaryInterface
 		{
 			public void actionPerformed(ActionEvent ae)
 			{
-				ConceptualSummarizer summarizer = new ConceptualSummarizer(paragraphArea.getText(), titleField.getText());
+				ConceptualSummarizer summarizer = new ConceptualSummarizer(paragraphArea.getText(), queryField.getText());
 				List<String> output = summarizer.getSummary();
 				summaryArea.setText("");
 				for( String line : output )
@@ -227,10 +228,10 @@ public class ConceptualSummaryInterface
 
 
 		conceptualSummaryFrame.add(headerLabel);
-		conceptualSummaryFrame.add(titleLabel);
+		conceptualSummaryFrame.add(queryLabel);
 		conceptualSummaryFrame.add(paragraphLabel);
 		conceptualSummaryFrame.add(summaryLabel);
-		conceptualSummaryFrame.add(titleField);
+		conceptualSummaryFrame.add(queryField);
 		conceptualSummaryFrame.add(paragraphArea);
 		conceptualSummaryFrame.add(summaryArea);
 		conceptualSummaryFrame.add(clearButton);
@@ -244,7 +245,7 @@ public class ConceptualSummaryInterface
 		paragraphScrollPane = new JScrollPane(paragraphArea);
 
 		summaryScrollPane.setBounds(10,440,680,220);
-		paragraphScrollPane.setBounds(10,160,680,220);
+		paragraphScrollPane.setBounds(10,90,680,235);
 
 		conceptualSummaryFrame.add(summaryScrollPane);
 		conceptualSummaryFrame.add(paragraphScrollPane);
