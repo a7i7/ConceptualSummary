@@ -79,8 +79,8 @@ public class WordList {
 					e.printStackTrace();
 					break;
 				}
-	//			System.out.println(s);
-	//			System.out.println(similarAssociatedWords);
+				System.out.println(s);
+				System.out.println(similarAssociatedWords);
 				for(String word:similarAssociatedWords)
 				{
 					if(keyWords.get(word)==null || keyWords.get(word)<currentKeyWordScore)

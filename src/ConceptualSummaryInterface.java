@@ -26,7 +26,7 @@ public class ConceptualSummaryInterface
 		saveDirectory = null;
 
 		conceptualSummaryFrame = new JFrame();
-		conceptualSummaryFrame.setBounds(30,30,700,700);
+		conceptualSummaryFrame.setBounds(30,30,700,725);
 		conceptualSummaryFrame.setTitle("Conceptual Summary");
 		conceptualSummaryFrame.setResizable(false);
 		conceptualSummaryFrame.setVisible(true);
@@ -60,7 +60,7 @@ public class ConceptualSummaryInterface
 		saveFileButton = new JButton("Save as file");
 
 
-		guiPanel.setBounds(0,0,700,700);
+		guiPanel.setBounds(0,0,700,725);
 		headerLabel.setBounds(130,2,500,50);
 		titleLabel.setBounds(15,60,150,25);
 		paragraphLabel.setBounds(15,135,150,25);
@@ -84,8 +84,7 @@ public class ConceptualSummaryInterface
 		paragraphLabel.setForeground(Color.WHITE);
 		summaryLabel.setForeground(Color.WHITE);
 		
-		Color c = new Color(0.70f, 0.80f, 0.90f);
-		guiPanel.setBackground(c);
+		guiPanel.setBackground(Color.green.darker().darker().darker());
 		
 		headerLabel.setFont(new Font("Serif",Font.BOLD,34));
 		titleLabel.setFont(new Font("Serif",Font.BOLD,12));
@@ -130,9 +129,29 @@ public class ConceptualSummaryInterface
 						BufferedReader bReader = new BufferedReader(fReader);
 
 						String line = null;
-						while( (line = bReader.readLine()) != null )
-							paragraphArea.setText(paragraphArea.getText() + "\n" + line);
-
+						String totalText = "";
+						if(file.getName().endsWith(".tsv"))
+						{
+							String inputKey = JOptionPane.showInputDialog("Enter the Key:");
+							while( (line = bReader.readLine()) != null )
+							{
+								String data[] = line.split("\t");
+								if(data[0].equalsIgnoreCase(inputKey))
+								{
+									totalText+=data[2];
+									if(!data[2].endsWith("."))
+										data[2]+=".";
+									totalText+="\n";
+								}
+							}
+							paragraphArea.setText(totalText);
+						}
+						else
+						{
+							while( (line = bReader.readLine()) != null )
+								totalText+=line+"\n";
+							paragraphArea.setText(totalText);
+						}
 						paragraphArea.setText(paragraphArea.getText().trim());
 
 						bReader.close();
