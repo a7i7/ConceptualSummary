@@ -14,7 +14,7 @@ public class WordList {
 	private Set<String> stopWords;
 	private Map<String,Double> keyWords;
 	final static int TOP_KEYWORDS_LENGTH = 10;
-	private final static boolean CONCEPT_NET_WEB_API_ON = false;
+	public final static boolean CONCEPT_NET_WEB_API_ON = false;
 	
 	WordList(String text)
 	{

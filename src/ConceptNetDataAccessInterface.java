@@ -6,7 +6,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.json.*;
 
@@ -20,6 +22,8 @@ public class ConceptNetDataAccessInterface {
 	{
 		return getListOfAssociations(object,-1);
 	}
+	
+	
 	public static List<String> getListOfAssociations(String object,int limit) throws IOException {
 		
 		final String ENGLISH_LANGUAGE = "en";
@@ -66,4 +70,23 @@ public class ConceptNetDataAccessInterface {
 		
 		return similarConcepts;
 	}
+
+
+	public static List<String> getListOfAssociations(List<String> titleWords) throws IOException 
+	{
+		Set<String> allSimilarWords = new HashSet<String>();
+		List<String> listOfSimilarWords = new ArrayList<String>();
+		for(String word:titleWords)
+		{
+			List<String> similarWords = getListOfAssociations(word);
+			allSimilarWords.addAll(similarWords);
+		}
+		
+		for(String s:titleWords)
+			allSimilarWords.remove(s);
+		
+		listOfSimilarWords.addAll(allSimilarWords);
+		return listOfSimilarWords;
+	}
+
 }

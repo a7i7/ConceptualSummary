@@ -51,7 +51,7 @@ public class Output_summary {
     //some of below declarations used in "ner" function which give us person tag word
     private Properties prop;
 	private StanfordCoreNLP pipeline;
-        LexicalizedParser lp = LexicalizedParser.loadModel("./library/englishPCFG.ser.gz");
+        LexicalizedParser lp = LexicalizedParser.loadModel("./lib/englishPCFG.ser.gz");
         TreebankLanguagePack tlp = new PennTreebankLanguagePack();
         GrammaticalStructureFactory gsf= tlp.grammaticalStructureFactory();
 //	public String Sentence_boundary(String text){
@@ -220,7 +220,8 @@ public class Output_summary {
     public List<String> createSentenceDiagram(List<List<String>> partedSentence){
         Output_summary global_os=new Output_summary();
         ArrayList<String> removable_words=new ArrayList<String>();
-        BufferedReader br;
+        removable_words.addAll(new WordList("").getStopWords());
+       /* BufferedReader br;
         try{
             br =new BufferedReader(new FileReader("stop_word.txt"));  //stop_word contain unnecessary preposition,article,
             String scan;
@@ -231,7 +232,7 @@ public class Output_summary {
         }
         catch(Exception e){
             e.printStackTrace();
-        }
+        }*/
 //        for(int i=0;i<removable_words.size();i++){
 //            System.out.println(removable_words.get(i));
 //        }

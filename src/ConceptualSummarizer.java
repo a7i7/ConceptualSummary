@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,7 +14,7 @@ public class ConceptualSummarizer {
 	private List<String> sentences;
 	private List<String> titleWords;
 	
-	private static final double TITLE_SCORE_WEIGHT = 1.5;
+	private static final double TITLE_SCORE_WEIGHT = 2.0;
 	private static final double SENTENCE_LENGTH_SCORE_WEIGHT = 0.25;
 	private static final double SENTENCE_POSITION_SCORE_WEIGHT = 1.0;
 	private static final double DBS_SBS_SCORE_WEIGHT = 2.0;
@@ -28,7 +29,20 @@ public class ConceptualSummarizer {
 		wordList = new WordList(text);
 		sentences = TextSplitter.splitIntoSentences(this.text);
 		titleWords = TextSplitter.splitIntoWords(this.title);
-//		System.out.println(titleWords);
+		if(true){
+			try
+			{
+				List<String> similarWords = ConceptNetDataAccessInterface.getListOfAssociations(titleWords);
+				titleWords.addAll(similarWords);
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
+//		System.out.println(this.titleWords);
+		
 	}
 	
 	private List<SimpleEntry<String,Integer>> scoreSentences(final Map<String,Double> sentenceRanks)
