@@ -18,10 +18,14 @@ public class ConceptualSummaryInterface
 	private JButton clearButton, resetButton, addFileButton, summarizeButton, saveFileButton;
 	private JScrollPane summaryScrollPane, paragraphScrollPane;
 	private String openDirectory, saveDirectory;
+	private SentenceSplitter splitter;
+	private SentenceMerger merger;
 
 	protected ConceptualSummaryInterface()
 	{
 		ConceptualSummaryInterface gui = this;
+		splitter = new SentenceSplitter();
+		merger = new SentenceMerger();
 		openDirectory = null;
 		saveDirectory = null;
 
@@ -191,39 +195,37 @@ public class ConceptualSummaryInterface
 				ConceptualSummarizer summarizer = new ConceptualSummarizer(paragraphArea.getText(), queryField.getText());
 				List<String> output = summarizer.getSummary();
 				summarizer = null;
-				try
-				{
-					Thread.sleep(3000);
-				}
-				catch(InterruptedException ie)
-				{
-					//do nothing
-				}
-				SentenceSplitter splitter = new SentenceSplitter();
+				// try
+				// {
+				// 	Thread.sleep(3000);
+				// }
+				// catch(InterruptedException ie)
+				// {
+				// 	//do nothing
+				// }
 				List<List<String> > splittedOutput = splitter.splitSentence(output);
-				splitter = null;
-				try
-				{
-					Thread.sleep(3000);
-				}
-				catch(InterruptedException ie)
-				{
-					//do nothing
-				}
-				SentenceMerger merger = new SentenceMerger();
+				// splitter = null;
+				// try
+				// {
+				// 	Thread.sleep(3000);
+				// }
+				// catch(InterruptedException ie)
+				// {
+				// 	//do nothing
+				// }
 				List<String> mergedOutput = merger.createSentenceDiagram(splittedOutput);
-				merger = null;
-				try
-				{
-					Thread.sleep(3000);
-				}
-				catch(InterruptedException ie)
-				{
-					//do nothing
-				}
+				// merger = null;
+				// try
+				// {
+				// 	Thread.sleep(3000);
+				// }
+				// catch(InterruptedException ie)
+				// {
+				// 	//do nothing
+				// }
 				summaryArea.setText("");
 				for( String line : mergedOutput )
-					summaryArea.setText(summaryArea.getText() + "\n" + line);
+					summaryArea.setText(summaryArea.getText() + "\n" + queryField.getText() + " --> " + line);
 				summaryArea.setText(summaryArea.getText().trim());
 			}
 		});

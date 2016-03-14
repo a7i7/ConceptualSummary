@@ -33,10 +33,27 @@ public class SentenceSplitter {
 	static Set<String> adjectivePhrases = new HashSet<>();
 	static Set<String> verbPhrases = new HashSet<>();
 	static Set<String> conjunctionPhrases = new HashSet<>();
+	private POSModel model;
+	private POSTaggerME tagger;
+	private InputStream is;
+	private ChunkerModel cModel;
+	private ChunkerME chunkerME;
 	
 	public SentenceSplitter()
 	{
-		resultSentence=new ArrayList<List<String> >();
+		model = new POSModelLoader().load(new File("en-pos-maxent.bin"));
+		tagger = new POSTaggerME(model);
+
+		try
+		{
+			is = new FileInputStream("en-chunker.bin");
+			cModel = new ChunkerModel(is);
+			chunkerME = new ChunkerME(cModel);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public static void getPhrases(Parse p) {
@@ -133,10 +150,7 @@ public class SentenceSplitter {
 	
 	public void split(List<String> sentence) throws Exception
 	{
-		
-		POSModel model = new POSModelLoader().load(new File("en-pos-maxent.bin"));
-		POSTaggerME tagger = new POSTaggerME(model);
-		
+		resultSentence=new ArrayList<List<String> >();
 		for(int i=0;i<sentence.size();i++)
 		{
 			String input = sentence.get(i);
@@ -155,14 +169,11 @@ public class SentenceSplitter {
 				tags = tagger.tag(tokens);
 			
 				POSSample sample = new POSSample(tokens, tags);
-//				System.out.println(sample.toString());
+				System.out.println(line);
 					
 			}
 				
 			// chunker
-			InputStream is = new FileInputStream("en-chunker.bin");
-			ChunkerModel cModel = new ChunkerModel(is);
-			ChunkerME chunkerME = new ChunkerME(cModel);
 			
 			List<String> temp=new ArrayList<String>();
 			

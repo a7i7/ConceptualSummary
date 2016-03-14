@@ -29,6 +29,7 @@ public class ConceptualSummarizer {
 		wordList = new WordList(text);
 		sentences = TextSplitter.splitIntoSentences(this.text);
 		titleWords = TextSplitter.splitIntoWords(this.title);
+		System.out.println(this.titleWords);
 		if(true){
 			try
 			{
@@ -41,7 +42,7 @@ public class ConceptualSummarizer {
 			}
 		}
 		
-//		System.out.println(this.titleWords);
+		System.out.println(this.titleWords);
 		
 	}
 	

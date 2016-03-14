@@ -302,7 +302,7 @@ public class SentenceMerger {
                             if(correct_input.equals(""))
                         correct_input=correct_input+temp.get(pp);
                         else
-                        correct_input=correct_input+"-->"+temp.get(pp);
+                        correct_input=correct_input+" --> "+temp.get(pp);
                             
                         }
                         
@@ -353,7 +353,7 @@ public class SentenceMerger {
                 if(prefinal_sentence.equals(""))
                 prefinal_sentence=prefinal_sentence+str;
                 else
-                prefinal_sentence=prefinal_sentence+"-->"+str;
+                prefinal_sentence=prefinal_sentence+" --> "+str;
             }
             output.add(prefinal_sentence);
             //System.out.println(prefinal_sentence);
