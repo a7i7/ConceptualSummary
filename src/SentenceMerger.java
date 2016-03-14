@@ -3,7 +3,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-// package output_summary;
+// package SentenceMerger;
 
 /**
  *
@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-public class Output_summary {
+public class SentenceMerger {
 
     /**
      * @param args the command line arguments
@@ -51,7 +51,7 @@ public class Output_summary {
     //some of below declarations used in "ner" function which give us person tag word
     private Properties prop;
 	private StanfordCoreNLP pipeline;
-        LexicalizedParser lp = LexicalizedParser.loadModel("./lib/englishPCFG.ser.gz");
+        LexicalizedParser lp = LexicalizedParser.loadModel("../lib/englishPCFG.ser.gz");
         TreebankLanguagePack tlp = new PennTreebankLanguagePack();
         GrammaticalStructureFactory gsf= tlp.grammaticalStructureFactory();
 //	public String Sentence_boundary(String text){
@@ -69,7 +69,7 @@ public class Output_summary {
 //        }
 
 	// no need to understand use for standford parser
-	public Output_summary(){
+	public SentenceMerger(){
 		// creates a StanfordCoreNLP object, with POS tagging, lemmatization, NER, parsing, and coreference resolution 
 	    prop = new Properties();
 	    try{
@@ -212,13 +212,13 @@ public class Output_summary {
             return output;
         }
     
-    //Output_summary global_os=new Output_summary();
+    //SentenceMerger global_os=new SentenceMerger();
         
         
         
     
     public List<String> createSentenceDiagram(List<List<String>> partedSentence){
-        Output_summary global_os=new Output_summary();
+        SentenceMerger global_os=new SentenceMerger();
         ArrayList<String> removable_words=new ArrayList<String>();
         removable_words.addAll(new WordList("").getStopWords());
        /* BufferedReader br;
@@ -363,7 +363,7 @@ public class Output_summary {
     }
     public static void main(String[] args) {
         // TODO code application logic here
-        Output_summary os=new Output_summary();
+        SentenceMerger os=new SentenceMerger();
         List< List<String> > paragraph=new ArrayList< List<String> >();
         List<String> sentence1=new ArrayList<String>();
         List<String> sentence2=new ArrayList<String>();
