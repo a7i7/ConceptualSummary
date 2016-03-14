@@ -41,12 +41,12 @@ public class SentenceSplitter {
 	
 	public SentenceSplitter()
 	{
-		model = new POSModelLoader().load(new File("en-pos-maxent.bin"));
+		model = new POSModelLoader().load(new File("./lib/en-pos-maxent.bin"));
 		tagger = new POSTaggerME(model);
 
 		try
 		{
-			is = new FileInputStream("en-chunker.bin");
+			is = new FileInputStream("./lib/en-chunker.bin");
 			cModel = new ChunkerModel(is);
 			chunkerME = new ChunkerME(cModel);
 		}
@@ -99,7 +99,7 @@ public class SentenceSplitter {
 	
 	public static void parseSentence(String sentence) throws Exception
 	{
-		InputStream is = new FileInputStream("en-parser-chunking.bin");
+		InputStream is = new FileInputStream("./lib/en-parser-chunking.bin");
 	    ParserModel model = new ParserModel(is);
 	    Parser parser = ParserFactory.create(model);
 	    

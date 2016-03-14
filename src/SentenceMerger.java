@@ -51,7 +51,7 @@ public class SentenceMerger {
     //some of below declarations used in "ner" function which give us person tag word
     private Properties prop;
 	private StanfordCoreNLP pipeline;
-        LexicalizedParser lp = LexicalizedParser.loadModel("../lib/englishPCFG.ser.gz");
+        LexicalizedParser lp = LexicalizedParser.loadModel("./lib/englishPCFG.ser.gz");
         TreebankLanguagePack tlp = new PennTreebankLanguagePack();
         GrammaticalStructureFactory gsf= tlp.grammaticalStructureFactory();
 //	public String Sentence_boundary(String text){
@@ -302,7 +302,7 @@ public class SentenceMerger {
                             if(correct_input.equals(""))
                         correct_input=correct_input+temp.get(pp);
                         else
-                        correct_input=correct_input+" --> "+temp.get(pp);
+                        correct_input=correct_input+" - "+temp.get(pp);
                             
                         }
                         
@@ -324,7 +324,7 @@ public class SentenceMerger {
 //                        if(correct_output.equals(""))
 //                        correct_output=correct_output+ans[it];
 //                        else
-//                        correct_output=correct_output+"-->"+ans[it];
+//                        correct_output=correct_output+"-"+ans[it];
 //                    }
                     output.add(correct_input);
                     //System.out.println(correct_output);
@@ -353,7 +353,7 @@ public class SentenceMerger {
                 if(prefinal_sentence.equals(""))
                 prefinal_sentence=prefinal_sentence+str;
                 else
-                prefinal_sentence=prefinal_sentence+" --> "+str;
+                prefinal_sentence=prefinal_sentence+" - "+str;
             }
             output.add(prefinal_sentence);
             //System.out.println(prefinal_sentence);
