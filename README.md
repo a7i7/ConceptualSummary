@@ -31,11 +31,11 @@ Use these libraries while building source code:
 
 1. Use the above mentioned libraries while executing the jar file.
 2. In addition, keep these files into "lib" directory
-    A. ejml-0.19-src.zip
-    B. en-chunker.bin
-    C. englishPCFG.ser.gz
-    D. en-parser-chunking.bin
-    E. en-pos-maxent.bin
-    F. xom-src-1.2.8.zip
+    i.   ejml-0.19-src.zip
+    ii.  en-chunker.bin
+    iii. englishPCFG.ser.gz
+    iv.  en-parser-chunking.bin
+    v.   en-pos-maxent.bin
+    vi.  xom-src-1.2.8.zip
 3. Provide at least 1 GB of RAM while executing the jar file.
     (Use "-Xmx1024m" argument in addition)
