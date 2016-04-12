@@ -41,5 +41,4 @@
 	* en-pos-maxent.bin
 	* xom-src-1.2.8.zip
 3. Provide at least 1 GB of RAM while executing the jar file.
-
-(Use "-Xmx1024m" argument in addition)
+	* (Use "-Xmx1024m" argument in addition)
