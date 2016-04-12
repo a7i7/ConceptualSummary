@@ -26,16 +26,20 @@
 * supportWN.jar
 * xom.jar
 * xom-src-1.2.8.zip
+
+
 ---
+
 # Executing the jar file
 
 1. Use the above mentioned libraries while executing the jar file.
 2. In addition, keep these files into "lib" directory
-..1. ejml-0.19-src.zip
-..2. en-chunker.bin
-..3. englishPCFG.ser.gz
-..4. en-parser-chunking.bin
-..5. en-pos-maxent.bin
-..6. xom-src-1.2.8.zip
+	* ejml-0.19-src.zip
+	* en-chunker.bin
+	* englishPCFG.ser.gz
+	* en-parser-chunking.bin
+	* en-pos-maxent.bin
+	* xom-src-1.2.8.zip
 3. Provide at least 1 GB of RAM while executing the jar file.
-...(Use "-Xmx1024m" argument in addition)
+
+(Use "-Xmx1024m" argument in addition)
