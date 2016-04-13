@@ -22,25 +22,25 @@ This task is divided into 3 small tasks
 How to calculate Score
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-############################## TitleScore :
+######### TitleScore :
 count = Number Of common non-stop words between query and sentence  
 NOTE: words in sentence that are similar in concept to any word in query are also counted (done with the help of concept net web API)  
 titleScore = count/number Of words in query  
 
-############################## SentenceLengthScore:
+######### SentenceLengthScore:
 sentenceLengthScore = 1.0-abs(number of words in sentence-20)/20  
 where 20 is ideal sentence length
 
-############################## SentencePositionScore:
+######### SentencePositionScore:
 n = normalized Position of sentence in between 0 and 1  
 The following research paper has the values listed in page 3  
 http://research.nii.ac.jp/ntcir/workshop/OnlineProceedings3/NTCIR3-TSC-SekiY.pdf  
 
-############################## SummationBasedSelection:
+######### SummationBasedSelection:
 score = sum of scores of all keywords contained in the sentence calculated in first step  
 summationBasedSelection=score/totalWordsInSentence
 
-############################## DensityBasedSelection:
+######### DensityBasedSelection:
 The formula is well written in page 3 of the following paper  
 http://www3.ntu.edu.sg/home/axsun/paper/sun_cikm07s.pdf  
 DbsSbsScore = summationBasedSelection+densityBasedSelection  
@@ -64,6 +64,7 @@ DbsSbsScore = summationBasedSelection+densityBasedSelection
 2. Coreference resolution using stanford parser.
 
 3. Merge those chunks and generate output.
+
 ---
 
 # Creating jar file
