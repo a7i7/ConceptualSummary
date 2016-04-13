@@ -20,6 +20,7 @@ This task is divided into 3 small tasks
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 How to calculate Score
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ############################## TitleScore :
 count = Number Of common non-stop words between query and sentence  
