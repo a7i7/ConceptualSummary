@@ -6,7 +6,7 @@
 
 This task is divided into 3 small tasks
 
-#### Select best 4 sentences
+#### A. Select best 4 sentences
 
 1. Find a frequency table of top 10 most frequent words in text. These words will be known as keywords. Associate a score with each keyword directly proportional to frequency.
 
@@ -53,7 +53,7 @@ http://www3.ntu.edu.sg/home/axsun/paper/sun_cikm07s.pdf
 DbsSbsScore = summationBasedSelection + densityBasedSelection  
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#### Divide the selected sentences into chunks
+#### B. Divide the selected sentences into chunks
 
 1. Create POS tree from sentences using open nlp tool.
 
@@ -63,7 +63,7 @@ DbsSbsScore = summationBasedSelection + densityBasedSelection
 
 4. From the POS arraylists remove unneccessary POS if any present from each sentences.
 
-#### Merge chunks and generate output
+#### C. Merge chunks and generate output
 
 1. Remove unnecessary articles and prepositions.
 	* Remove all the stop words from every chunk of words.  
@@ -73,6 +73,7 @@ DbsSbsScore = summationBasedSelection + densityBasedSelection
 
 3. Merge new chunks and generate output.
 
+---
 ---
 
 # Creating jar file
